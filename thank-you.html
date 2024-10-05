@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .thank-you-container {
+            text-align: center;
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px; /* Adjusted to place the button inside the container */
+            right: 10px; /* Adjusted to place the button inside the container */
+            font-size: 24px;
+            color: #6e6e6e;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .close-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .thank-you-container .checkmark {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .thank-you-container h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .thank-you-container p {
+            font-size: 16px;
+            color: #777;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: #55cb43;
+            text-decoration: none;
+            border-radius: 9px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .button-container a:hover {
+            background-color: #419b33;
+        }
+    </style>
+</head>
+<body>
+
+<div class="thank-you-container">
+    <button class="close-button" onclick="window.location.href='consumer.html'">&times;</button>
+    <div class="checkmark">✔</div>
+    <h1>Thank You!</h1>
+    <p>Your Order has been successfully placed.</p>
+</div>
+
+<div class="button-container">
+    <a href="home.html">Home</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            overflow: auto; /* Make the page scrollable */
+            background: linear-gradient(to left, #73ee3e, #55cb43);
+        }
+        .header {
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(253, 253, 253, 0.856);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            justify-content: space-between; /* Aligns items on each side */
+        }
+
+        .header img {
+            height: 60px;
+            margin-right: 20px;
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1); /* Normal size */
+            }
+            50% {
+                transform: scale(1.1); /* Slightly larger */
+            }
+        }
+
+        .header a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #73ee3e, #55cb43);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .container {
+            background-color: ivory;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px groove limegreen;
+            box-shadow: 0 0 10px rgba(29, 29, 29, 0.945);
+            width: 100%;
+            top: 10px;
+            max-width: 480px;
+            margin: 80px auto 20px; /* Center container and add margin for scroll */
+            position: relative;
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .role-selection {
+            display: flex;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .role-selection input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border: 2px solid #0a0a0a;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            margin-right: 5px;
+            position: relative;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .role-selection input[type="radio"]:checked {
+            border-color: green;
+            background-color: green;
+        }
+
+        .role-selection input[type="radio"]:checked::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .signup-form h2 {
+            margin-bottom: 20px;
+            color: black;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            border: 2px groove limegreen;
+            border-radius: 25px;
+            box-sizing: border-box;
+            color: #181818;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .form-group input:not(:placeholder-shown),
+        .form-group select:not(:placeholder-shown) {
+            background-color: transparent;
+            color: #181818;
+            font-weight: 600;
+        }
+
+        .form-group input::placeholder {
+            color: black;
+            font-weight: 600;
+        }
+
+        .form-group input:focus::placeholder,
+        .form-group select:focus::placeholder {
+            color: transparent;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: transparent;
+            color: #0a0a0a;
+            font-weight: 600;
+            border: none;
+            padding: 15px;
+            border: 2px double #0d551d;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 220px;
+            margin-right: 15px; /* Space between buttons */
+        }
+
+        .form-group input:hover,
+        .form-group select:hover,
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 5px limegreen;
+        }
+
+        button:hover {
+            background: linear-gradient(25deg, springgreen, green, springgreen);
+            border: none;
+            box-shadow: 0 0 20px #084916;
+            color: #fff;
+        }
+
+        /* Additional styles for the Cancel button */
+        .cancel-button {
+            background-color: #fff;
+            border-color: #ff0000;
+            color: black;
+        }
+
+        .cancel-button:hover {
+            background: linear-gradient(25deg, #ff6666, rgb(225, 2, 2), #ff6666);
+            box-shadow: 0 0 20px #c70039;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #57eb40, #55cb43);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Circles for Animation */
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.253);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        /* Circle Positions and Sizes */
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="home.html">
+            <img src="logo.png" alt="Logo">
+        </a>
+    </header>
+    <div class="background">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <form class="signup-form" id="signupForm" action="process-signup.php" method="POST">
+            <h2>Sign Up</h2>
+            <div class="form-group">
+                <input type="text" placeholder="Username" id="username" name="username" required>
+                <div id="username-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" id="password" name="password" required>
+                <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Confirm Password" id="confirm-password" name="confirm-password" required>
+                <div id="confirm-password-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Location" id="location" name="location" required>
+                <div id="location-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <input type="tel" placeholder="Phone Number" id="phone" name="phone" required>
+                <div id="phone-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <select id="security-question" name="security-question" required>
+                    <option value="" disabled selected>Select a Security Question</option>
+                    <option value="pet">What is the name of your first pet?</option>
+                    <option value="school">What is the name of your elementary school?</option>
+                    <option value="city">In what city were you born?</option>
+                </select>
+                <div id="security-question-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Your Answer" id="security-answer" name="security-answer" required>
+                <div id="security-answer-error" class="error-message"></div>
+            </div>
+            <div class="role-selection">
+                <div class="role-selection-text">&nbsp;Role:</div>
+                <label>
+                    <input type="radio" name="role" value="farmer" required>Farmer &nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="role" value="consumer" required>Consumer
+                </label>
+            </div>
+            <div class="form-buttons">
+                <button type="submit">Sign Up</button>
+                <button type="button" class="cancel-button" onclick="window.location.href='home.html'">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateUsername() {
+            const username = document.getElementById('username').value;
+            const usernameError = document.getElementById('username-error');
+            if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
+                usernameError.textContent = 'Username must be 3-20 characters long and contain only letters, numbers, and underscores.';
+            } else {
+                usernameError.textContent = '';
+            }
+        }
+
+        function validatePassword() {
+    const password = document.getElementById('password').value;
+    const passwordError = document.getElementById('password-error');
+    
+    // Updated password pattern
+    const passwordPattern = /^(?=.[A-Z])(?=.[a-z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
+
+    if (!passwordPattern.test(password)) {
+        // Error message updated to match the actual validation rules
+        passwordError.textContent = 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.';
+    } else {
+        passwordError.textContent = '';
+    }
+}
+
+
+
+        function validateConfirmPassword() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const confirmPasswordError = document.getElementById('confirm-password-error');
+            if (confirmPassword !== password) {
+                confirmPasswordError.textContent = 'Passwords do not match.';
+            } else {
+                confirmPasswordError.textContent = '';
+            }
+        }
+
+        function validatePhone() {
+            const phone = document.getElementById('phone').value;
+            const phoneError = document.getElementById('phone-error');
+            if (!/^\d{10}$/.test(phone)) {
+                phoneError.textContent = 'Phone number must be 10 digits.';
+            } else {
+                phoneError.textContent = '';
+            }
+        }
+
+        function validateSecurityQuestion() {
+            const securityQuestion = document.getElementById('security-question').value;
+            const securityQuestionError = document.getElementById('security-question-error');
+            if (securityQuestion === '') {
+                securityQuestionError.textContent = 'Please select a security question.';
+            } else {
+                securityQuestionError.textContent = '';
+            }
+        }
+
+        function validateSecurityAnswer() {
+            const securityAnswer = document.getElementById('security-answer').value;
+            const securityAnswerError = document.getElementById('security-answer-error');
+            if (securityAnswer.trim() === '') {
+                securityAnswerError.textContent = 'Security answer is required.';
+            } else {
+                securityAnswerError.textContent = '';
+            }
+        }
+
+        document.getElementById('username').addEventListener('input', validateUsername);
+        document.getElementById('password').addEventListener('input', validatePassword);
+        document.getElementById('confirm-password').addEventListener('input', validateConfirmPassword);
+        document.getElementById('phone').addEventListener('input', validatePhone);
+        document.getElementById('security-question').addEventListener('change', validateSecurityQuestion);
+        document.getElementById('security-answer').addEventListener('input', validateSecurityAnswer);
+    </script>
+</body>
+</html>

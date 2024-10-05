@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agrilovers: Connecting farmers directly with consumers. Discover a new way to sell and buy fresh produce online.">
+    <title>Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Poppins',Arial, sans-serif;
+            background-color: #e0dcdc;
+            text-align: center;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: whitesmoke;
+        }
+
+        .header img {
+            height: 45px;
+            margin-right: 20px;
+            margin-left: 10px;
+            animation: beat 1s infinite ;
+        }
+        @keyframes beat {
+             0%, 100% {
+                 transform: scale(1); /* Normal size */
+             }
+            50% {
+              transform: scale(1.1); /* Slightly larger */
+             }
+        }
+
+        .title {
+            font-size: 24px;
+        }
+
+        .header ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .header ul li {
+            display: inline;
+        }
+
+        .header ul li a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+        }
+
+        .header ul li a:hover {
+            text-decoration: underline;
+        }
+        /* Style the Google Translate dropdown */
+body #goog-gt-c {
+    border-radius: 10px; /* Rounded corners */
+    height: 40px; /* Set height */
+}
+
+/* Additional styles for dropdown */
+body #goog-gt-c select {
+    border-radius: 10px; /* Rounded corners for select box */
+    height: 100%; /* Ensure select box takes full height */
+    padding: 0 10px; /* Add some padding */
+}
+
+/* Optional: style the Google Translate button if needed */
+body .goog-te-combo {
+    border-radius: 10px; /* Rounded corners */
+    height: 30px; /* Set height */
+    padding: 0 10px; /* Add some padding */
+}
+
+        .content {
+            position: relative;
+            margin: 0;
+        }
+
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+        }
+
+        .mySlides::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Change from 350px to 100% to cover the full height */
+    background: rgba(0, 0, 0, 0.4); /* Black shade with transparency */
+    z-index: 1; /* Place the overlay above the image */
+}
+
+.mySlides {
+    position: relative;
+}
+
+.mySlides img {
+    z-index: -1; 
+    height:600px;
+    width:100%;
+    object-fit: cover;/* Move the image behind the overlay */
+}
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 20px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Number text (1/5 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        .image-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Light black shade with transparency */
+            z-index: 1; /* Place the overlay above the image */
+        }
+
+        .description-box {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 40px;
+            max-width: 400px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .box, .box2, .box3, .box4 {
+            background-color: #f0f0f0;
+            border: white;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: justify;
+        }
+
+        .box p, .box2 p, .box3 p, .box4 p {
+            font-size: 20px;
+            line-height: 1.7;
+        }
+
+        .sign {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f0f0f0;
+            border: white;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: left;
+            position: relative;
+        }
+        .sign-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    line-height:40px;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+
+.sign-content button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.sign img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 500px;
+    border-radius: 10px;
+    object-fit: cover;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .sign {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sign img {
+        width: 100%;
+        height: auto;
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .sign-content {
+        width: 100%;
+    }
+
+    .sign-content button {
+        margin-left: 0;
+    }
+}
+        .footer {
+            background-color: #4CAF50;
+            padding: 40px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer .column {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .footer p {
+            line-height: 1.6;
+        }
+
+        .footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .footer ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color:black;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .header ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .sign {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .sign img {
+                width: 100%;
+                height: auto;
+                position: relative;
+                margin-top: 20px;
+            }
+
+            .sign-content {
+                width: 100%;
+            }
+
+            .sign-content button {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="title-section">
+            <img src="logo.png" alt="Hackathon Logo">
+        </div>
+        <nav>
+            <ul aria-label="Main Navigation">
+                <li><a href="#home">Our Story</a></li>
+                <li><a href="#joinus">Join Us</a></li>
+                <li><a href="signin.html">Login</a></li>
+                <li><a href="#contact">Contacts</a></li>
+                <div id="google_translate_element"></div>
+
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement(
+				{pageLanguage: 'en'},
+				'google_translate_element'
+			);
+		}
+	</script>
+
+	<script type="text/javascript"
+			src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+	</script>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content" id="home">
+        <section class="slideshow-container">
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 5</div>
+                    <img src="https://regenerationinternational.org/wp-content/uploads/2018/05/women-farmers-harvest-farm-field-India.jpg" alt="Image 1">
+                    <div class="description-box">
+                        <p>Efficient way for farmers to sell their product.</p>
+                    </div>
+                </div>
+    
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 5</div>
+                    <img src="https://img.freepik.com/premium-photo/farmers-are-planting-rice-farm-farmers-bend-grow-rice-agriculture-asia-cultivation-using-people_41722-1571.jpg?w=1800" alt="Image 2">
+                    <div class="description-box">
+                      <p>Fresh and organic produce directly from the farm.</p>
+                    </div>
+                </div>
+    
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 5</div>
+                    <img src="https://www.politico.eu/wp-content/uploads/2019/09/download-1-1.jpg" alt="Image 3">
+                    <div class="description-box">
+                        <p>Connecting farmers and consumers in a new way.</p>
+                    </div>
+                </div>
+    
+                <div class="mySlides fade">
+                    <div class="numbertext">4 / 5</div>
+                    <img src="https://localwiki.org/fremont/fremont%20farmers'%20markets/_files/farmers-market-produce.jpg" alt="Image 4">
+                    <div class="description-box">
+                       <p> Support local farmers by buying directly from them.</p>
+                    </div>
+                </div>
+    
+                <div class="mySlides fade">
+                    <div class="numbertext">5 / 5</div>
+                    <img src="https://www.mckinsey.com/~/media/McKinsey/Industries/Retail/Our%20Insights/The%20secret%20to%20smarter%20fresh%20food%20replenishment%20Machine%20learning/Fresh-food_thumbnail_1536x1536_200_Standard.ashx?mw=1536&car=72:35&cq=50&tco=200" alt="Image 5">
+                    <div class="description-box">
+                        <p>Fresh from farm to your table.</p>
+                    </div>
+                </div>
+    
+            <!-- Dots/bullets/indicators -->
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span> 
+                <span class="dot" onclick="currentSlide(2)"></span> 
+                <span class="dot" onclick="currentSlide(3)"></span> 
+                <span class="dot" onclick="currentSlide(4)"></span> 
+                <span class="dot" onclick="currentSlide(5)"></span> 
+            </div>
+        <section class="box">
+            <p>Are you a farmer who is struggling to sell your produce? Do you feel like you're doing everything right, but no one is buying your crops? You're not alone. Many farmers are finding it difficult to sell their produce in today's market.<br><br>
+                But don't worry, there are ways to guarantee that you'll sell your crops. Keep reading to learn more.<br>
+            </p>
+        </section>
+
+        <section class="box2">
+            <p>
+                <b>Discover a New Way to Sell!</b><br><br>
+
+                Hey there, farmer friend! Tired of the old-school way of selling your veggies?<br><br>
+                Our platform is like a magic marketplace where you can show off your fresh produce to a bunch of happy buyers! Just a few clicks and—voila!—you’re all set to start selling. It’s super easy and way more fun than the usual selling routine!<br>
+                <br><b>Make Selling a Breeze</b><br><br>
+
+                Ever wish selling your crops could be as easy as pie?<br>
+                Now it can be! Our platform is like a friendly helper that does the hard stuff for you. You just need to tell us what you’re selling, and we’ll make sure it reaches the right people—just like that!
+            </p>
+        </section>
+
+        <section class="box3">
+            <p>
+                <b>Your Farming Superpower</b><br><br>
+
+                Did you know you have a secret superpower? It’s your amazing ability to grow the freshest, tastiest crops! But guess what? Our platform can be your sidekick, helping you get the most out of your hard work.<br>
+                It’s like having a superhero buddy who’s always there to give you a hand!
+            </p>
+        </section>
+
+        <section class="box4" id="joinus">
+            <p>
+                <b>Why Join Us?</b><br><br>
+
+                Wondering why you should sign up? Here are a few reasons:<br><br>
+
+                🌟 It’s easy-peasy to use<br>
+                🌟 You’ll reach more buyers<br>
+                🌟 You get fair prices<br>
+                🌟 Your produce will be the star of the show!<br><br>
+
+                So, why wait? Join us today and let’s make your farming life a whole lot easier!
+            </p>
+        </section>
+
+        <section class="sign">
+            <div class="sign-content" id="delivery-register">
+                <p><b>Join Us as a Delivery Partner!</b></p>
+                <p>Are you interested in delivering fresh produce directly from farms to customers? Register now to become a part of our growing network of delivery personnel.</p>
+                <div class="button-container">
+                    <button onclick="window.location.href='delivery.html'">Collaborate</button>
+                </div>
+            </div>
+            <img src="https://www.independent.com/wp-content/uploads/2020/03/IMG_2609-1.jpg?w=2048" alt="Delivery person">
+        </section>
+        
+    </main>
+
+    <footer class="footer">
+        <div class="column" id="terms">
+            <h3>Terms of Use</h3>
+            <p>Learn about the terms and conditions for using our platform. We are committed to providing a transparent and fair marketplace for farmers and consumers alike.</p>
+        </div>
+        <div class="column" id="contact">
+            <h3>Contacts</h3>
+            <p>Have any questions? Get in touch with us through our customer service channels. We are here to help you with any issues or inquiries you may have.</p>
+            <ul>
+                <li><a href="mailto:support@agricultureapp.com">Email: support@agricultureapp.com</a></li>
+                <li><a href="tel:+1234567890">Phone: +1234567890</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Follow Us</h3>
+            <p>Stay connected with us through social media and get the latest updates.</p>
+            <div class="social-icons">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>&copy; 2024 Agriculture App. All rights reserved.</p>
+    </div>
+    <script>
+        let slideIndex = 1; // Start from the first slide
+        showSlides(slideIndex);
+    
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+    
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+    
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1} // Loop back to the first slide
+            if (n < 1) {slideIndex = slides.length} // Loop to the last slide
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+        }
+    
+        // Optional: Automatically change slides every 3 seconds
+        setInterval(() => plusSlides(1), 3000);
+    </script>
+    
+</body>
+</html>

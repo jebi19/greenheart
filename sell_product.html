@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Products</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header Styles */
+        .header {
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(248, 246, 246, 0.856);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            color: rgb(10, 10, 10);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            justify-content: space-between; /* Aligns items on each side */
+        }
+
+        .header img {
+            height: 60px;
+            margin-right: 20px;
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1); /* Normal size */
+            }
+            50% {
+                transform: scale(1.1); /* Slightly larger */
+            }
+        }
+
+        .header a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .translate-menu {
+            margin-right: 20px; /* Space between translate and menu icon */
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 11;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .dropdown-menu a i {
+            margin-right: 10px;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #55cb43;
+            color: white;
+        }
+
+        .box {
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.452);
+            background-color: whitesmoke;
+            border-radius: 24px;
+            border: 2px groove limegreen;
+            color: black;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            margin-top: 150px;
+        }
+
+        input, button, select {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 22px);
+            border-radius: 5px;
+            border: none;
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.829);
+            background-color: transparent;
+            border-bottom: 1px ridge #111111a9;
+            box-sizing: border-box;
+            transition: border-bottom 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-bottom: 2px ridge rgb(2, 20, 10);
+        }
+
+        input[type="number"] {
+            appearance: textfield; /* For Firefox */
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none; /* For Chrome, Safari, and other WebKit browsers */
+            margin: 0;
+        }
+
+        button {
+            background-color: seagreen;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            width: 50%;
+            border-radius: 50px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: mediumseagreen;
+        }
+
+        #addAnother {
+            display: none;
+            margin-top: 10px;
+            background-color: seagreen;
+            width: 50%; /* Matches the width of the submit button */
+            border-radius: 50px;
+            margin-left: auto; /* Center horizontally */
+            margin-right: auto; /* Center horizontally */
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .header {
+                flex-direction: row; /* Ensure items are on the same line */
+                align-items: center;
+                padding: 10px;
+                justify-content: space-between; /* Ensure space is between logo and menu */
+            }
+
+            .header img {
+                height: 50px; /* Adjust logo size for smaller screens */
+                margin-right: 15px;
+            }
+
+            .menu-icon {
+                font-size: 22px; /* Adjust menu icon size */
+            }
+
+            .box {
+                width: 90%;
+                margin-top: 100px; /* Adjust top margin for smaller screens */
+            }
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #73ee3e, #55cb43);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Circles for Animation */
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.253);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        /* Circle Positions and Sizes */
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        .translate-menu {
+    margin-right: 20px; /* Space between translate and menu icon */
+    position: relative;
+    top: 10px; /* Adjust this value to move it lower */
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <a href="home.html">
+            <img src="logo.png" alt="Logo">
+        </a>
+        <div class="menu-container">
+            <div id="google_translate_element" class="translate-menu"></div>
+            <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="farmer-dashboard.html"><i class="fas fa-house"></i>&nbsp;Home Page</a>
+                <a href="signin.html"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
+            </div>
+        </div>
+    </header>    
+    <div class="background">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="box">
+        <h2>Sell a Product</h2>
+        <form id="sellProductForm">
+            <input type="text" id="productName" name="productName" placeholder="Product Name" required><br>
+            <input type="number" id="quantity" name="quantity" placeholder="Quantity" required><br>
+            <input type="number" id="price" name="price" placeholder="Price" required><br>
+            <select name="category" id="category" required>
+                <option value="" disabled selected>Select a Category</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Pulses">Pulses</option>
+                <option value="Grains">Grains</option>
+            </select><br>
+            <select name="sell_to" id="sell_to" required>
+                <option value="" disabled selected>Sell To</option>
+                <option value="Individual">Individual</option>
+                <option value="Dealers">Dealers</option>
+                <option value="Supermarket">Supermarket</option>
+            </select><br>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="confirmationMessage"></p>
+        <button id="addAnother" onclick="addAnotherProduct()">Add Another Product</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        document.getElementById('menu-icon').addEventListener('click', function() {
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            if (dropdownMenu.style.display === 'block') {
+                dropdownMenu.style.display = 'none';
+            } else {
+                dropdownMenu.style.display = 'block';
+            }
+        });
+
+        document.getElementById('sellProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+    
+            // Get the values from the form
+            const productName = document.getElementById('productName').value;
+            const quantity = document.getElementById('quantity').value;
+            const price = document.getElementById('price').value;
+            const category = document.getElementById('category').value;
+            const sell_to = document.getElementById('sell_to').value;
+    
+            // Send data to the PHP script using fetch API
+            fetch('submit_product.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    productName: productName,
+                    quantity: quantity,
+                    price: price,
+                    category: category,
+                    sell_to: sell_to
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'exists') {
+                    if (confirm("This product with the same quantity and price is already listed. Do you want to add it again?")) {
+                        document.getElementById('sellProductForm').submit();
+                    }
+                } else if (data.status === 'success') {
+                    alert('Product added successfully!');
+                    document.getElementById('confirmationMessage').textContent = '';
+                    document.getElementById('addAnother').style.display = 'block';
+                } else {
+                    document.getElementById('confirmationMessage').textContent = 'Error: ' + data.message;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    
+        function addAnotherProduct() {
+            document.getElementById('sellProductForm').reset();
+            document.getElementById('confirmationMessage').textContent = '';
+            document.getElementById('addAnother').style.display = 'none';
+        }
+    </script>
+    
+</script>
+<script type="text/javascript">
+   function googleTranslateElementInit() {
+       new google.translate.TranslateElement(
+           {pageLanguage: 'en'},
+           'google_translate_element'
+       );
+   }
+</script>
+
+<script type="text/javascript"
+       src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+</script>
+    
+</body>
+</html>

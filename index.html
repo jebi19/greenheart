@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Products - Pulses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('leaf.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header Styles */
+        .header {
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(253, 253, 253, 0.856);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            color: rgb(29, 29, 29);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            justify-content: space-between;
+        }
+
+        .header img {
+            height: 60px;
+            margin-right: 20px;
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .header .icons {
+            display: flex;
+            gap: 15px; /* Space between the icons */
+        }
+
+        .header .icons a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px; /* Icon size */
+        }
+
+        .header .icons a:hover {
+            color: #55cb43;
+        }
+
+        @media (max-width: 900px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #73ee3e, #55cb43);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Circles for Animation */
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.479);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        /* Circle Positions and Sizes */
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: rgba(253, 253, 253, 0.95);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 180px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #55cb43;
+            color: #fff;
+        }
+
+        .dropdown-menu a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Image Grid Styles */
+        /* Image Grid Styles */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    height: 200px; /* Set a fixed height to maintain aspect ratio */
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container */
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+    transform: scale(1.05);
+}
+
+.image-container:hover {
+    box-shadow: inset 0 0 15px rgba(255, 254, 254, 0.5);
+}
+
+@media (max-width: 768px) {
+    .image-grid {
+        padding: 10px;
+        margin-top: 70px;
+    }
+}
+@import url(https://fonts.googleapis.com/css?family=Khula:700);
+.console-container {
+            font-family: Khula;
+            font-size: 4em;
+            text-align: center;
+            height: 80px;
+            width: 600px;
+            display: block;
+            color: white;
+            margin-top: 100px; /* Space between the header and text animation */
+            z-index: 1; /* Ensure the text is above the background circles */
+        }
+.console-underscore {
+   display:inline-block;
+  position:relative;
+  top:-0.14em;
+  left:10px;
+}
+.image-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.767); /* Semi-transparent black background */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <a href="home.html">
+        <img src="logo.png" alt="Logo">
+        </a>
+        <div class="menu-container">
+            <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="consumer-dashboard.html"><i class="fas fa-chart-line"></i>&nbsp;Dashboard</a>
+                <a href="signin.html"><i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="background">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class='console-container'><span id='text'></span><div class='console-underscore' id='console'>&#95;</div></div>
+    <!-- Image Grid Section -->
+    <div class="image-grid">
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.Bc-BkFbd-Hj5zPCeimBFlwHaJz?w=135&h=180&c=7&r=0&o=5&pid=1.7" alt="Product 1">
+            <div class="image-label">CHICK PEAS</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.ULp2Im80NyNQs82YrfOiKgHaC2?w=293&h=134&c=7&r=0&o=5&pid=1.7" alt="Product 2">
+            <div class="image-label">KIDNEY BEANS</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.bVRt42AqIFzoZTgoraIRDgHaFj?w=228&h=180&c=7&r=0&o=5&pid=1.7" alt="Product 3">
+            <div class="image-label">GREEN GRAM</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.Yhyze3eI83gaOT6-alyQDAAAAA?w=176&h=180&c=7&r=0&o=5&pid=1.7" alt="Product 4">
+            <div class="image-label">HORSE GRAM</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.9NPM09VmayF62578Nlo4-wHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7" alt="Product 5">
+            <div class="image-label">LENTILS</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.nM_lEbJ7gG-82rgu3k8lyQHaE4?w=267&h=180&c=7&r=0&o=5&pid=1.7" alt="Product 6">
+            <div class="image-label">BENGAL GRAM</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.nfBU16cd9ue5rQMISNz6_AHaHa?w=181&h=181&c=7&r=0&o=5&pid=1.7" alt="Product 7">
+            <div class="image-label">BLACK EYED PEAS</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.rHEm2mM0O3RVxwM2encJ2QHaHa?w=193&h=193&c=7&r=0&o=5&pid=1.7" alt="Product 8">
+            <div class="image-label">URAD DAL</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.Kl8PcymPK_z13boB79ElagHaF6?w=243&h=194&c=7&r=0&o=5&pid=1.7" alt="Product 9">
+            <div class="image-label">TOOR DAL</div>
+        </div>
+        <div class="image-container">
+            <img src="https://th.bing.com/th/id/OIP.mQ-W2QVTpqZj_T31SPB3YwHaFQ?w=242&h=180&c=7&r=0&o=5&pid=1.7" alt="Product 10">
+        <div class="image-label">BLACK GRAM</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        }
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-icon')) {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                if (dropdownMenu.style.display === 'block') {
+                    dropdownMenu.style.display = 'none';
+                }
+            } 
+        }
+        // function([string1, string2],target id,[color1,color2])    
+ consoleText(['Top Picks.', 'PULSES.', 'Made with Love❤.'], 'text',['black','maroon','white']);
+
+function consoleText(words, id, colors) {
+  if (colors === undefined) colors = ['#fff'];
+  var visible = true;
+  var con = document.getElementById('console');
+  var letterCount = 1;
+  var x = 1;
+  var waiting = false;
+  var target = document.getElementById(id)
+  target.setAttribute('style', 'color:' + colors[0])
+  window.setInterval(function() {
+
+    if (letterCount === 0 && waiting === false) {
+      waiting = true;
+      target.innerHTML = words[0].substring(0, letterCount)
+      window.setTimeout(function() {
+        var usedColor = colors.shift();
+        colors.push(usedColor);
+        var usedWord = words.shift();
+        words.push(usedWord);
+        x = 1;
+        target.setAttribute('style', 'color:' + colors[0])
+        letterCount += x;
+        waiting = false;
+      }, 1000)
+    } else if (letterCount === words[0].length + 1 && waiting === false) {
+      waiting = true;
+      window.setTimeout(function() {
+        x = -1;
+        letterCount += x;
+        waiting = false;
+      }, 1000)
+    } else if (waiting === false) {
+      target.innerHTML = words[0].substring(0, letterCount)
+      letterCount += x;
+    }
+  }, 120)
+  window.setInterval(function() {
+    if (visible === true) {
+      con.className = 'console-underscore hidden'
+      visible = false;
+
+    } else {
+      con.className = 'console-underscore'
+
+      visible = true;
+    }
+  }, 400)
+}
+    </script>
+</body>
+</html>

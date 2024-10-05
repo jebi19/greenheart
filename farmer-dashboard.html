@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Sales Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #55cb43;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: left;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed; /* Fixed position for permanent visibility */
+            left: 0; /* Align to the left of the viewport */
+            top: 0; /* Align to the top of the viewport */
+            z-index: 500;
+        }
+        /* Style the Google Translate dropdown */
+body #goog-gt-c {
+    border-radius: 10px; /* Rounded corners */
+    height: 40px; /* Set height */
+}
+
+/* Additional styles for dropdown */
+body #goog-gt-c select {
+    border-radius: 10px; /* Rounded corners for select box */
+    height: 100%; /* Ensure select box takes full height */
+    padding: 0 10px; /* Add some padding */
+}
+
+/* Optional: style the Google Translate button if needed */
+body .goog-te-combo {
+    background-color: #55cb43;
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 10px; 
+    border: none;/* Rounded corners */
+    height: 40px; /* Set height */
+    padding: 0 10px; /* Add some padding */
+}
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            position: fixed;
+            top: 20px;
+            left: 20px; /* Adjusted for space next to sidebar */
+            z-index: 1000;
+        }
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 60px;
+        }
+        .menu-item {
+            padding: 10px 20px;
+            margin: 10px 0;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: transparent;
+            color: white;
+            border-radius: 4px;
+        }
+        .menu-item:hover {
+            background-color: white;
+            color: black;
+            padding-left: 30px;
+        }
+        .container {
+    flex: 1;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr); /* Two rows */
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: 270px; /* Adjusted to account for the sidebar width */
+}
+
+.chart-container, .orders-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, z-index 0.3s ease;
+}
+
+.chart-container:hover, .orders-container:hover {
+    z-index: 10;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.orders-container {
+    width: 100%;
+    max-width: 600px; /* Adjust to match chart container width */
+    padding: 20px;
+}
+
+.orders-container h2 {
+    margin-bottom: 20px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th, .orders-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: #f2f2f2;
+}
+
+    </style>
+</head>
+<body>
+    <div class="menu-icon" onclick="toggleMenu()" style="font-size:20px;color:white;">DashBoard</div>
+    <div class="sidebar">
+        <div class="menu-items">
+            <div class="menu-item" onclick="window.location.href='sell_product.html'">Add Product</div>
+            <div class="menu-item" onclick="window.location.href='view_orders.php'">View Orders</div>
+            <div class="menu-item" onclick="window.location.href='sell_to.html'">Sell To</div>
+            <div class="menu-item" onclick="window.location.href='view_products.php'">View Products</div>
+            <div id="google_translate_element"></div>
+
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement(
+				{pageLanguage: 'en'},
+				'google_translate_element'
+			);
+		}
+	</script>
+
+	<script type="text/javascript"
+			src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+	</script>
+            <div class="menu-item" onclick="window.location.href='signin.html'">Logout</div>
+        </div>        
+    </div>
+    <div class="container">
+        <div class="chart-container">
+            <h2>Crop Sales</h2>
+            <canvas id="salesChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Profit Overview</h2>
+            <canvas id="profitChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Number of Crops in Sale</h2>
+            <canvas id="cropsChart"></canvas>
+        </div>
+        <div class="orders-container">
+            <h2>Recent Orders</h2>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Wheat</td>
+                        <td>$50</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Corn</td>
+                        <td>$30</td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>Rice</td>
+                        <td>$45</td>
+                    </tr>
+                    <tr>
+                        <td>004</td>
+                        <td>Barley</td>
+                        <td>$25</td>
+                    </tr>
+                    <tr>
+                        <td>005</td>
+                        <td>Wheat</td>
+                        <td>$55</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>    
+
+    <script>
+        // JavaScript to handle menu actions (no sliding effect)
+        function toggleMenu() {
+            // Function removed since sliding effect is no longer needed
+        }
+
+        // Function to resize charts
+        function resizeCharts() {
+            salesChart.resize();
+            profitChart.resize();
+            cropsChart.resize();
+        }
+
+        // Sample data
+        const salesData = {
+            labels: ['Wheat', 'Corn', 'Rice', 'Barley'],
+            datasets: [{
+                label: 'Sales',
+                data: [5000, 3000, 4500, 2000], // Example data
+                backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],
+                borderColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],
+                borderWidth: 1
+            }]
+        };
+
+        const profitData = {
+            labels: ['Wheat', 'Corn', 'Rice', 'Barley'],
+            datasets: [{
+                label: 'Profit',
+                data: [2000, 1500, 2500, 1000], // Example data
+                backgroundColor: '#4bc0c0',
+                borderColor: '#4bc0c0',
+                borderWidth: 1
+            }]
+        };
+
+        const cropsData = {
+            labels: ['Wheat', 'Corn', 'Rice', 'Barley'],
+            datasets: [{
+                label: 'Number of Crops',
+                data: [30, 20, 25, 15], // Example data
+                backgroundColor: ['#ff9999', '#cc65fe', '#36a2eb', '#ffcc99'],
+                borderColor: '#fff',
+                borderWidth: 1
+            }]
+        };
+
+        // Crop Sales Chart
+        const ctxSales = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctxSales, {
+            type: 'bar',
+            data: salesData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Profit Overview Chart
+        const ctxProfit = document.getElementById('profitChart').getContext('2d');
+        const profitChart = new Chart(ctxProfit, {
+            type: 'line',
+            data: profitData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Number of Crops in Sale Chart
+        const ctxCrops = document.getElementById('cropsChart').getContext('2d');
+        const cropsChart = new Chart(ctxCrops, {
+            type: 'doughnut',
+            data: cropsData,
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Adjust charts on window resize
+        window.addEventListener('resize', resizeCharts);
+    </script>
+</body>
+</html>

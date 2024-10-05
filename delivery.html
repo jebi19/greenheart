@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Delivery Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 120px 0 0; /* Add padding to the top to avoid overlap */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the start */
+}
+
+.container {
+    max-width: 800px;
+    padding: 30px;
+    margin: 120px; /* Adjust the margin value to control spacing below the header */
+    background: #fff;
+    color: black;
+    width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
+    border-radius: 8px;
+    border: 2px solid green;
+}
+
+        header {
+            background-color: #55cb43;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        header img {
+            max-height: 60px;
+            margin: 0 15px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            color: black ;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        input, select, textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .checkbox-group {
+            margin-bottom: 15px;
+            margin-left: 20px; /* Added margin from the left */
+        }
+        .available-hours-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .available-hours-group input {
+            width: 48%;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .header {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(253, 253, 253, 0.856);
+    margin-bottom: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    color: rgb(29, 29, 29);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    justify-content: space-between;
+}
+
+.header img {
+    height: 60px;
+    margin-right: 20px;
+    animation: beat 1s infinite;
+}
+.header .menu-container {
+    display: flex;
+    align-items: center;
+}
+.menu-container
+{
+    gap:30px;
+}
+.header .translate-menu {
+    margin-left: 20px;
+}
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #73ee3e, #55cb43);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Circles for Animation */
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.479);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        /* Circle Positions and Sizes */
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        .menu-icon {
+    font-size: 28px;
+    color: #333;
+    cursor: pointer;
+    margin-right: 20px;
+    position: relative;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: rgba(253, 253, 253, 0.95);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 180px;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #55cb43;
+    color: #fff;
+}
+
+.dropdown-menu a i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+@media (max-width: 900px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+            header img {
+                max-height: 40px;
+                margin: 0 10px;
+            }
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            .available-hours-group {
+                flex-direction: column;
+            }
+            .available-hours-group input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        /* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.thumbs-up {
+    font-size: 80px;
+    color: #28a745;
+    margin-bottom: 10px;
+    animation: bounce 0.6s ease-in-out infinite alternate;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+.available-hours-group {
+        display:inline;
+        justify-content: space-between;
+    }
+
+    .available-hours-group input[type="time"] {
+        width: 49%;
+        box-sizing: border-box;
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="home.html">
+            <img src="logo.png" alt="Logo">
+        </a>
+        <div class="menu-container">
+            <div id="google_translate_element" class="translate-menu"></div>
+            <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="home.html"><i class="fas fa-house"></i>&nbsp;Home Page</a>
+                <a href="signin.html"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
+            </div>
+        </div>
+    </header>    
+    
+    <div class="background">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Volunteer Delivery Form</h2>
+        <form action="/submit-delivery" method="POST">
+            <label for="name">Volunteer Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="work-type">Preferred Work Type:</label>
+            <select id="work-type" name="work-type" required>
+                <option value="" disabled selected>Select work type</option>
+                <option value="full-time">Full Time</option>
+                <option value="part-time">Part Time</option>
+            </select>
+
+            <label for="location">Preferred Location:</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="location1" name="location" value="Adyar">
+                <label for="location1">Adyar</label><br>
+                <input type="checkbox" id="location2" name="location" value="T. Nagar">
+                <label for="location2">T. Nagar</label><br>
+                <input type="checkbox" id="location3" name="location" value="Velachery">
+                <label for="location3">Velachery</label>
+            </div>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required pattern="[0-9]{10}">
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+            <label for="experience">Delivery Experience:</label>
+            <textarea id="experience" name="experience" rows="4" placeholder="Describe any previous delivery experience"></textarea>
+
+            <label for="available-days">Available Days(in a week):</label>
+            <input type="number" id="available-days" name="available-days" required>
+
+            <label for="available-hours">Available Hours:</label>
+<div class="available-hours-group">
+    <input type="time" id="available-from" name="available-from" required>
+    <input type="time" id="available-to" name="available-to" required>
+</div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <!-- Modal Structure -->
+    <div id="successModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <i class="fas fa-thumbs-up thumbs-up"></i>
+        <h2 style="color: #55cb43;">Success!</h2>
+        <p>Your request has been placed successfully.</p>
+    </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        }
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-icon')) {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                if (dropdownMenu.style.display === 'block') {
+                    dropdownMenu.style.display = 'none';
+                }
+            } 
+        }
+        document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Show the modal
+    var modal = document.getElementById("successModal");
+    modal.style.display = "block";
+
+    // Close the modal when the user clicks on <span> (x)
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal when the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+
+    </script>
+     <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script type="text/javascript"
+            src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+    </script>
+</body>
+</html>

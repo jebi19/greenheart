@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Details Progress Bar</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #5cd639;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.progress-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.progress-line {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    height: 6px;
+    background-color: rgb(137, 135, 135);
+    z-index: 1;
+    border-radius: 3px;
+    transition: width 0.3s ease-in-out;
+}
+
+.progress-step {
+    position: relative;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    background-color: #004900;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #fff;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.progress-step.active {
+    background-color: #fff;
+    color: #004900;
+}
+
+.progress-step:before {
+    content: attr(data-step);
+    position: absolute;
+    top: -30px;
+    font-size: 0.8rem;
+    color: #004900;
+}
+
+.progress-step:nth-child(2) ~ .progress-line {
+    width: 25%;
+}
+
+.progress-step:nth-child(3) ~ .progress-line {
+    width: 50%;
+}
+
+.progress-step:nth-child(4) ~ .progress-line {
+    width: 75%;
+}
+
+.progress-step:nth-child(5) ~ .progress-line {
+    width: 100%;
+}
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress">
+            <div class="progress-line"></div>
+            <div class="progress-step active">Order Placed</div>
+            <div class="progress-step">Shipped</div>
+            <div class="progress-step">In Transit</div>
+            <div class="progress-step">Out for Delivery</div>
+            <div class="progress-step">Delivered</div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate dynamic updates
+const steps = document.querySelectorAll('.progress-step');
+const line = document.querySelector('.progress-line');
+
+let currentStep = 0;
+
+function updateProgress() {
+    steps.forEach((step, index) => {
+        if (index <= currentStep) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+
+    switch (currentStep) {
+        case 0:
+            line.style.width = '0%';
+            break;
+        case 1:
+            line.style.width = '25%';
+            break;
+        case 2:
+            line.style.width = '50%';
+            break;
+        case 3:
+            line.style.width = '75%';
+            break;
+        case 4:
+            line.style.width = '100%';
+            break;
+    }
+}
+
+function nextStep() {
+    if (currentStep < steps.length - 1) {
+        currentStep++;
+        updateProgress();
+    }
+}
+
+// Simulate moving through steps every 2 seconds
+setInterval(nextStep, 2000);
+
+
+    </script>
+</body>
+</html>

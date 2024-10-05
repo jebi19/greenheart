@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Payment Method</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .payment-container {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .payment-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .payment-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .payment-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .payment-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-container">
+    <h2>Select Payment Method</h2>
+    <form id="payment-form">
+        <div class="payment-option">
+            <input type="radio" name="payment-method" value="card" id="card">
+            <label for="card">Credit/Debit Card</label>
+        </div>
+        <div class="payment-option">
+            <input type="radio" name="payment-method" value="upi" id="upi">
+            <label for="upi">UPI Payment</label>
+        </div>
+        <div class="payment-option">
+            <input type="radio" name="payment-method" value="cash" id="cash">
+            <label for="cash">Cash on Delivery</label>
+        </div>
+        <button type="submit" class="payment-button">Proceed to Pay</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('payment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
+
+        if (selectedPaymentMethod) {
+            const paymentMethod = selectedPaymentMethod.value;
+            alert(`You selected: ${paymentMethod} `);
+
+        if (paymentMethod === 'card') {
+             window.location.href = 'card.html';
+        } 
+        else if (paymentMethod === 'upi') {
+            window.location.href = 'upi.html';
+        }
+         else if (paymentMethod === 'cash') {
+            window.location.href = 'cash.html';
+        }
+        } 
+        else {
+            alert('Please select a payment method.');
+        }
+    });
+</script>
+
+</body>
+</html>
